@@ -17,16 +17,23 @@ function ajustar() {
     const iframe = document.getElementById("powerbi");
     const altura = window.innerHeight;
 
-    // mantém o tamanho que já funcionou para o rodapé
     iframe.style.height = (altura * 1.08) + "px";
-
-    // antes estava subindo demais (-2%)
-    // agora sobe bem menos para não cortar o topo
     iframe.style.top = (altura * -0.01) + "px";
 }
 
+// ajusta na abertura e no resize
 ajustar();
 window.addEventListener("resize", ajustar);
+
+// reload do iframe a cada 1 minuto (60000 ms)
+const srcOriginal = document.getElementById("powerbi").src;
+setInterval(() => {
+    const iframe = document.getElementById("powerbi");
+    iframe.src = "";           // limpa primeiro
+    setTimeout(() => {
+        iframe.src = srcOriginal; // volta a URL original
+    }, 100);
+}, 60000);
 </script>
 
 </body>
