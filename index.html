@@ -25,7 +25,7 @@ function ajustar() {
 ajustar();
 window.addEventListener("resize", ajustar);
 
-// reload do iframe a cada 3 minutos (180.000 ms)
+// reload do iframe a cada 3 horas (10.800.000 ms)
 const srcOriginal = document.getElementById("powerbi").src;
 setInterval(() => {
     const iframe = document.getElementById("powerbi");
@@ -33,7 +33,7 @@ setInterval(() => {
     setTimeout(() => {
         iframe.src = srcOriginal; // volta a URL original
     }, 100);
-}, 180000);
+}, 10800000);
 </script>
 
 </body>
