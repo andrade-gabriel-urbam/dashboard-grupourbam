@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<body style="margin:0; overflow:hidden;">
+
+<div id="container" style="width:100%; height:100vh; overflow:hidden; position:relative;">
+    
+    <iframe 
+        id="powerbi"
+        src="https://app.powerbi.com/view?r=eyJrIjoiODBlYTk2NTUtYjVkOC00MGUyLWJmMDUtZjZjOTc5YWJhNzExIiwidCI6ImQ3NzhiYWZkLWUxYTgtNGU4OS05M2E2LWRiZjU0YjY5YjkzMCJ9&pageName=a068728ed947ecb9abdb"
+        style="position:absolute; left:0; width:100%; border:none;">
+    </iframe>
+
+</div>
+
+<script>
+// URLs dos dois dashboards do Power BI
+const URLs = [
+    "https://app.powerbi.com/view?r=eyJrIjoiODBlYTk2NTUtYjVkOC00MGUyLWJmMDUtZjZjOTc5YWJhNzExIiwidCI6ImQ3NzhiYWZkLWUxYTgtNGU4OS05M2E2LWRiZjU0YjY5YjkzMCJ9&pageName=a068728ed947ecb9abdb",
+    "https://app.powerbi.com/view?r=eyJrIjoiODBlYTk2NTUtYjVkOC00MGUyLWJmMDUtZjZjOTc5YWJhNzExIiwidCI6ImQ3NzhiYWZkLWUxYTgtNGU4OS05M2E2LWRiZjU0YjY5YjkzMCJ9&pageName=04f2441200b81e810ca8"
+];
+
+let indiceAtual = 0;
+
+function ajustar() {
+    const iframe = document.getElementById("powerbi");
+    const altura = window.innerHeight;
+
+    iframe.style.height = (altura * 1.08) + "px";
+    iframe.style.top = (altura * -0.01) + "px";
+}
+
+ajustar();
+window.addEventListener("resize", ajustar);
+
+// Troca de dashboard a cada 60 segundos
+// 60000 = 1 minuto por dashboard; você pode mudar para 120000 (2 minutos) se quiser
+setInterval(() => {
+    indiceAtual = (indiceAtual + 1) % URLs.length; // avança + volta para o primeiro
+    const iframe = document.getElementById("powerbi");
+    iframe.src = ""; // limpa o iframe
+    setTimeout(() => {
+        iframe.src = URLs[indiceAtual]; // troca para o próximo dashboard
+    }, 100);
+}, 60000);
+</script>
+
+</body>
+</html>
